@@ -1,0 +1,43 @@
+from abc import ABC, abstractmethod
+
+class BarangElektornik(ABC) :
+    
+    @abstractmethod
+    def tampil_detail():
+        pass
+    @abstractmethod
+    def hitung_total(self,pajak,beli):
+        pass
+    
+class inventory(BarangElektornik):
+    
+    def __init__(self,nama,stok,harga_dasar):
+        self.nama = nama
+        self.__stok = stok
+        self.__harga_dasar = harga_dasar
+   
+   # proses getter dan setter stok
+    def get_stok(self):
+        return self.__stok
+    def set_stok(self, nambah):
+        if nambah < 0 :
+            print("lu nyetok apa? kids")
+        elif nambah > 0:
+            print("oke gan siap disimpan")
+            self.__stok += nambah
+        else:
+            self.__stok = nambah
+    
+    # class anak 
+class laptop(BarangElektornik):
+    def tampil_detail(info):
+        print(f"Nama Barang: {info}")
+    def hitung_total(self,pajak,beli):
+         beli * (1 +pajak)
+    
+class smartphone(BarangElektornik):
+    def tampil_detail(info):
+        print(f"Nama Barang: {info}")
+    def hitung_total(self,pajak,beli):
+         beli * (1 +pajak)
+    
