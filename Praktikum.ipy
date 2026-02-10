@@ -1,43 +1,71 @@
 from abc import ABC, abstractmethod
-
+    # abstarct class 
 class BarangElektornik(ABC) :
-    
-    @abstractmethod
-    def tampil_detail():
-        pass
-    @abstractmethod
-    def hitung_total(self,pajak,beli):
-        pass
-    
-class inventory(BarangElektornik):
-    
-    def __init__(self,nama,stok,harga_dasar):
+     def __init__(self,nama,stok,harga_dasar):
         self.nama = nama
-        self.__stok = stok
-        self.__harga_dasar = harga_dasar
-   
-   # proses getter dan setter stok
-    def get_stok(self):
-        return self.__stok
-    def set_stok(self, nambah):
-        if nambah < 0 :
-            print("lu nyetok apa? kids")
-        elif nambah > 0:
-            print("oke gan siap disimpan")
-            self.__stok += nambah
-        else:
-            self.__stok = nambah
+        self.__stok = stok #private
+        self.__harga_dasar = harga_dasar #private
+        @abstractmethod
+        def tampil_detail(self):
+         pass
     
-    # class anak 
+        @abstractmethod
+        def hitung_total(self , total):
+            pass
+        
+        #proses getter dan setter (Enkapsulasi)
+        def get_stok():
+            return self.__stok
+        def get_harga_dasar():
+            return self.__harga_dasar
+
+        def set_nambah_stok(self, nambah):
+            if nambah < 0 :
+                print("lu nyetok apa? kids")
+                
+            else  :
+                self.__stok += nambah
+                print(f"stok sudah masuk {self.nama} sebanyak {nambah} ")
+                
+        # Child class
+    
 class laptop(BarangElektornik):
-    def tampil_detail(info):
-        print(f"Nama Barang: {info}")
-    def hitung_total(self,pajak,beli):
-         beli * (1 +pajak)
+    def __init__(self, nama, stok, harga_dasar , procesor):
+        super().__init__(nama, stok, harga_dasar)
+        self.procesor = procesor
+        
+         # polimorphism
+    def tampil_detail(self):
+        return f"[laptop] {self.nama} , this procesor: {self.procesor}"
+    def hitung_total(self , total):
+        pajak = 0.1 * self.__harga_dasar #10 % pajak
+        total_harga = (self.__harga_dasar + pajak) * total
+        return total_harga
     
 class smartphone(BarangElektornik):
-    def tampil_detail(info):
-        print(f"Nama Barang: {info}")
-    def hitung_total(self,pajak,beli):
-         beli * (1 +pajak)
+    def __init__(self, nama, stok, harga_dasar , kamera):
+        super().__init__(nama, stok, harga_dasar)
+        self.kamera = kamera
+        
+    # polimorphism
+    def tampil_detail(self):
+        return f"[smartphone] {self.nama} , this camera: {self.kamera}"
+    
+    def hitung_total(self , total):
+        pajak = 0.05 * self.__harga_dasar #10 % pajak
+        total_harga = (self.__harga_dasar + pajak) * total
+        
+        
+        print(f"ini barangmu {self.nama} dengan total harga {total_harga}")
+        
+   
+        
+   
+   
+   
+   
+    
+
+
+   
     
